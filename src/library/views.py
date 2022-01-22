@@ -1,19 +1,18 @@
-from django.http import HttpResponse
-from django.template import loader
+from django.shortcuts import render, get_object_or_404
+
 
 from .models import Book
 
 # Create your views here.
 def index(request):
   books = Book.objects.order_by('title')
-  template = loader.get_template('library/index.html')
   context = {
     'books':books,
   }
 
-  return HttpResponse(template.render(context, request))
+  return render(request, 'library/index.html', context)
 
 def bookDetail(request, book_id):
-  response = "You're looking at the details of book %s."
-  return HttpResponse(response % book_id)
+  book = get_object_or_404(Book, pk=book_id)
+  return render(request, 'library/book-detail.html', {'book': book})
 
