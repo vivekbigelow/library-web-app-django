@@ -1,0 +1,28 @@
+<form action="{% url 'library:processNewBook' %}" method="post">
+  {% csrf_token %}
+  <fieldset>
+    <legend>
+      <h1>Add a new book</h1>
+    </legend>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+      <label for="title">Title:</label>
+      <input type='text' name="title"></input>
+
+      <label for='author'>Choose an Author:</label>
+      <select id='author' name="author">
+        {% for author in authors %}
+            <option value="{{author.pk}}">{{author.firstName|add:' '|add:author.lastName}}</option>
+        {% endfor %}
+      </select>
+    
+      <label for='genre'>Choose a Genre:</label>
+      <select id='genre' name="genre">
+        {% for genre in genres %}
+          <option value="{{genre.pk}}">{{genre.name}}</option>
+        {% endfor %}
+      </select>
+    
+
+  </fieldset>
+  <input type="submit" value="Add book">
+</form>
