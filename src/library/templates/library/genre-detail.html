@@ -1,3 +1,6 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{%static 'library/style.css' %}">
+
 <h1>{{genre.name}}</h1>
 <ul>
   {%for book in books%}
